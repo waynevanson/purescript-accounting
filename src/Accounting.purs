@@ -42,15 +42,15 @@ data Account
 --
 -- | Create a `Credit` from an `Int`.
 credit :: Int -> Maybe Value
-credit = nonZero >>> map Credit
+credit int = nonZero >>> map Credit $ int
 
 -- | Create a `Debit` from an `Int`.
 debit :: Int -> Maybe Value
-debit = nonZero >>> map Debit
+debit int = nonZero >>> map Debit $ int
 
 -- | Create an abstraction
 transaction :: Date -> List Entry -> Maybe Transaction
-transaction date =
+transaction date entries =
   partitionMap
     ( \(Entry { value }) -> case value of
         Credit _ -> Left value
@@ -61,3 +61,4 @@ transaction date =
     >>> case _ of
         Tuple (Just credits) (Just debits) -> Just $ Transaction { date, credits, debits }
         otherwise -> Nothing
+    $ entries
