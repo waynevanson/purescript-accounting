@@ -10,7 +10,6 @@ You can edit this file as you like.
   , "filterable"
   , "money"
   , "psci-support"
-  , "refined"
   ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]
