@@ -1,13 +1,16 @@
-module Data.Accounting.Internal (nonZero, NonZero, toTuple) where
+module Data.Accounting.Internal (nonZero, NonZero(..), toTuple) where
 
-import Prelude
+import Data.Boolean (otherwise)
+import Data.Eq (class Eq, (/=))
+import Data.Function (($))
 import Data.List.Types (List, (:))
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
 
--- Use the NonZero from Types
 newtype NonZero
   = NonZero Int
+
+derive instance eqNonZero :: Eq NonZero
 
 toTuple :: forall a. List a -> Maybe (Tuple a a)
 toTuple = case _ of
